@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>{{ role|title }} Dashboard</h2>
+
+{% if role == 'reader' %}
+    <h3>Available Articles</h3>
+    {% for article in articles %}
+        <p>{{ article.title }} - by {{ article.created_by.username }}</p>
+        <form method="post" action="{% url 'subscribe_article' article.id %}">
+            {% csrf_token %}
+            <button type="submit">Subscribe to Author</button>
+        </form>
+    {% empty %}
+        <p>No articles yet.</p>
+    {% endfor %}
+
+{% elif role == 'publisher' %}
+    <a href="{% url 'create_article' %}">Create New Article</a>
+    <h3>Your Articles</h3>
+    {% for article in articles %}
+        <p>
+            {{ article.title }}
+            <a href="{% url 'read_article' article.id %}">Read</a>
+            <a href="{% url 'update_article' article.id %}">Update</a>
+            <a href="{% url 'delete_article' article.id %}">Delete</a>
+        </p>
+    {% empty %}
+        <p>No articles yet.</p>
+    {% endfor %}
+
+{% elif role == 'editor' %}
+    <h3>Articles Awaiting Approval</h3>
+    {% for article in articles %}
+        <p>
+            {{ article.title }} - by {{ article.created_by.username }}
+            <a href="{% url 'approve_article' article.id %}">Approve</a>
+            <a href="{% url 'update_article' article.id %}">Update</a>
+            <a href="{% url 'delete_article' article.id %}">Delete</a>
+        </p>
+    {% empty %}
+        <p>No articles to approve.</p>
+    {% endfor %}
+{% endif %}
+{% endblock %}
