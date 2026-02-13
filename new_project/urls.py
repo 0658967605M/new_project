@@ -21,6 +21,9 @@ from django.contrib.auth.views import LogoutView
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('news.urls')),  # your app handles /
-    path('logout/', LogoutView.as_view(next_page='home'), name='logout'),  # redirect to home
-    path('accounts/', include('django.contrib.auth.urls')),  # login/logout (login still works)
+    path(
+        'logout/', LogoutView.as_view(next_page='home'), name='logout'
+        ),  # redirect to home
+    path('accounts/', include(
+        'django.contrib.auth.urls')),  # login/logout (login still works)
 ]

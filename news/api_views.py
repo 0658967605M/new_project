@@ -4,6 +4,7 @@ from rest_framework.response import Response
 from .models import Article
 from .serializers import ArticleSerializer
 
+
 class ReaderArticlesAPI(APIView):
     permission_classes = [IsAuthenticated]
 

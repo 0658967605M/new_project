@@ -39,10 +39,12 @@ class ArticleUpdateForm(forms.ModelForm):
 class CustomUserCreationForm(UserCreationForm):
     ROLE_CHOICES = (
         ('reader', 'Reader'),
-        ('publisher', 'Publisher'),
+        ('journalist', 'Journalist'),
         ('editor', 'Editor'),
     )
-    role = forms.ChoiceField(choices=ROLE_CHOICES, widget=forms.Select(attrs={'class': 'form-control'}))
+    role = forms.ChoiceField(
+        choices=ROLE_CHOICES, widget=forms.Select(
+            attrs={'class': 'form-control'}))
 
     class Meta:
         model = User

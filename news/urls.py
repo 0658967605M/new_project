@@ -1,17 +1,39 @@
 from django.urls import path
-from .views import dashboard, register, create_article, approve_article, delete_article
-from .api_views import ReaderArticlesAPI
 from . import views
-from django.contrib.auth.views import LogoutView
 
 urlpatterns = [
-    path('', views.home, name='home'),
-    path('logout/', LogoutView.as_view(next_page='home'), name='logout'), 
-    path('register/', register, name='register'),
-    path('dashboard/', dashboard, name='dashboard'),
-    path('subscribe/<int:article_id>/', views.subscribe_article, name='subscribe_article'),
-    path('create/', create_article, name='create_article'),
-    path('approve/<int:article_id>/', approve_article),
-    path('delete/<int:article_id>/', delete_article),
-    path('api/articles/', ReaderArticlesAPI.as_view()),
+    path("", views.home, name="home"),
+
+    # Auth
+    path("register/", views.register, name="register"),
+    path("login/", views.login_view, name="login"),
+    path("logout/", views.logout_view, name="logout"),
+
+    # Dashboard
+    path("dashboard/", views.dashboard, name="dashboard"),
+
+    # Articles
+    path("read/<int:article_id>/", views.read_article, name="read_article"),
+    path("create/", views.create_article, name="create_article"),
+    path(
+        "update/<int:article_id>/", views.update_article,
+        name="update_article"
+        ),
+    path(
+        "delete/<int:article_id>/", views.delete_article,
+        name="delete_article"
+        ),
+    path(
+        "approve/<int:article_id>/", views.approve_article,
+        name="approve_article"
+        ),
+    path("subscribe/journalist/<int:journalist_id>/",
+         views.subscribe_journalist, name="subscribe_journalist"),
+    path("subscribe/publisher/<int:publisher_id>/",
+         views.subscribe_publisher, name="subscribe_publisher"),
+    path("unsubscribe/journalist/<int:journalist_id>/",
+         views.unsubscribe_journalist, name="unsubscribe_journalist"),
+    path("unsubscribe/publisher/<int:publisher_id>/",
+         views.unsubscribe_publisher, name="unsubscribe_publisher"),
+
 ]

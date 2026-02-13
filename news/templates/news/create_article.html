@@ -8,4 +8,7 @@
     <button type="submit">Create Article</button>
 </form>
 
+{% for message in messages %}
+    <p style="color:green">{{ message }}</p>
+{% endfor %}
 {% endblock %}

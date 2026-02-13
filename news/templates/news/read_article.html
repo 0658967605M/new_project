@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>{{ article.title }}</h2>
+<p><strong>Author:</strong> {{ article.created_by.username }}</p>
+<p><strong>Publisher:</strong> {{ article.publisher.name }}</p>
+<p><strong>Status:</strong> 
+    {% if article.approved %}Approved{% else %}Pending Approval{% endif %}
+</p>
+<hr>
+<p>{{ article.content }}</p>
+
+{% endblock %}

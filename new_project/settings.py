@@ -9,7 +9,6 @@ https://docs.djangoproject.com/en/5.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
-
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -47,7 +46,8 @@ ROOT_URLCONF = 'new_project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],  # you can add BASE_DIR / 'templates' if you want global templates
+        'DIRS': [BASE_DIR / 'templates'],
+        # you can add BASE_DIR / 'templates' if you want global templates
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -65,17 +65,29 @@ WSGI_APPLICATION = 'new_project.wsgi.application'
 # Database
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'test_2',
+        'USER': '0658967605M',
+        'PASSWORD': 'Manqoba030605',
+        'HOST': 'localhost',
+        'PORT': '3306',
+        'OPTIONS': {
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
+        }
     }
 }
 
+
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
-    {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',},
-    {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',},
-    {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',},
-    {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',},
+    {'NAME': 'django.contrib.auth.password_validation.'
+        'UserAttributeSimilarityValidator', },
+    {'NAME': 'django.contrib.auth.password_validation.'
+        'MinimumLengthValidator', },
+    {'NAME': 'django.contrib.auth.password_validation.'
+        'CommonPasswordValidator', },
+    {'NAME': 'django.contrib.auth.password_validation.'
+        'NumericPasswordValidator', },
 ]
 
 # Internationalization
@@ -98,6 +110,6 @@ AUTH_USER_MODEL = 'news.User'   # <--- this is critical for our roles
 # ----------------------------------
 # 🔹 LOGIN CONFIGURATION
 # ----------------------------------
-LOGIN_URL = '/accounts/login/'
-LOGIN_REDIRECT_URL = '/dashboard/'  # go here after login
-LOGOUT_REDIRECT_URL = '/accounts/login/'  # go here after logout
+LOGIN_URL = "login"
+LOGIN_REDIRECT_URL = "dashboard"
+LOGOUT_REDIRECT_URL = "home"
