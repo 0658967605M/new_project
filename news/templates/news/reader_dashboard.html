@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>Reader Dashboard</h2>
+
+<h3>All Approved Articles</h3>
+
+{% for article in articles %}
+<div class="card">
+    <h4>{{ article.title }}</h4>
+    <p>{{ article.content|truncatewords:20 }}</p>
+
+    <p>Author: {{ article.created_by.username }}</p>
+
+    <!-- JOURNALIST SUBSCRIBE BUTTON -->
+    {% if article.created_by.role == "journalist" %}
+        <a href="{% url 'subscribe_journalist' article.created_by.id %}">
+            Subscribe Journalist
+        </a>
+        |
+        <a href="{% url 'unsubscribe_journalist' article.created_by.id %}">
+            Unsubscribe
+        </a>
+    {% endif %}
+
+    <!-- PUBLISHER SUBSCRIBE BUTTON -->
+    {% if article.publisher %}
+        <p>Publisher: {{ article.publisher.name }}</p>
+
+        <a href="{% url 'subscribe_publisher' article.publisher.id %}">
+            Subscribe Publisher
+        </a>
+        |
+        <a href="{% url 'unsubscribe_publisher' article.publisher.id %}">
+            Unsubscribe
+        </a>
+    {% endif %}
+
+</div>
+{% endfor %}
+
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Create Newsletter</h2>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <div class="mb-3">
+            <label for="id_title" class="form-label">Title</label>
+            {{ form.title }}
+        </div>
+
+        <div class="mb-3">
+            <label for="id_content" class="form-label">Content</label>
+            {{ form.content }}
+        </div>
+
+        <div class="mb-3">
+            <label for="id_publisher" class="form-label">Publisher</label>
+            {{ form.publisher }}
+        </div>
+
+        <button type="submit" class="btn btn-primary">
+            Create Newsletter
+        </button>
+    </form>
+</div>
+{% endblock %}

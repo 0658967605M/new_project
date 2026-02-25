@@ -1,10 +1,38 @@
 {% extends "base.html" %}
-{% block content %}
-<h1>Welcome to News App</h1>
-<p>Explore the latest news articles with our intuitive interface,
 
-    dont waste time and get started now!
-<p>
-    ENJOY READING!
-</p>
+{% block content %}
+
+<div class="text-center mt-5">
+
+    <h1 class="display-4 mb-3">Welcome to News App</h1>
+
+    <p class="lead">
+        Explore the latest news articles with our intuitive interface.
+        Don't waste time — get started now!
+    </p>
+
+    <p class="fw-bold mb-4">
+        ENJOY READING!
+    </p>
+
+    {% if not user.is_authenticated %}
+        <div class="mt-4">
+            <a href="{% url 'login' %}" class="btn btn-primary btn-lg me-3">
+                Login
+            </a>
+
+            <a href="{% url 'register' %}" class="btn btn-outline-dark btn-lg">
+                Register
+            </a>
+        </div>
+    {% else %}
+        <div class="mt-4">
+            <a href="{% url 'dashboard' %}" class="btn btn-success btn-lg">
+                Go to Dashboard
+            </a>
+        </div>
+    {% endif %}
+
+</div>
+
 {% endblock %}

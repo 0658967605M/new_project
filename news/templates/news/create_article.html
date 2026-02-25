@@ -1,14 +1,37 @@
 {% extends "base.html" %}
 {% block content %}
-<h2>Create New Article</h2>
 
-<form method="post">
+<h2>Create Article</h2>
+
+<form method="POST">
     {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Create Article</button>
+
+    <label>Title:</label><br>
+    <input type="text" name="title" required>
+    <br><br>
+
+    <label>Content:</label><br>
+    <textarea name="content" rows="6" required></textarea>
+    <br><br>
+
+    <label>Choose Publisher:</label><br>
+    <select name="publisher">
+        <option value="">-- Select Publisher --</option>
+
+        {% for publisher in publishers %}
+            <option value="{{ publisher.id }}">
+                {{ publisher.name }}
+            </option>
+        {% empty %}
+            <option disabled>
+                You are not subscribed to any publisher
+            </option>
+        {% endfor %}
+    </select>
+
+    <br><br>
+
+    <button type="submit">Submit</button>
 </form>
 
-{% for message in messages %}
-    <p style="color:green">{{ message }}</p>
-{% endfor %}
 {% endblock %}

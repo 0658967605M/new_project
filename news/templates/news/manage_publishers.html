@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>Publisher Management</h2>
+
+<h3>Create Publisher</h3>
+
+<form method="POST">
+    {% csrf_token %}
+    <input type="text" name="name" placeholder="Publisher Name" required>
+    <button type="submit">Create</button>
+</form>
+
+<hr>
+
+<h3>All Publishers</h3>
+
+{% for publisher in publishers %}
+<div class="card">
+    <p>{{ publisher.name }}</p>
+</div>
+{% endfor %}
+
+{% endblock %}

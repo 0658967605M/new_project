@@ -1,0 +1,136 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>Journalist Dashboard</h2>
+
+<hr>
+
+<!-- =============================== -->
+<!-- NOTIFICATIONS -->
+<!-- =============================== -->
+
+<h3>Notifications</h3>
+
+{% if notifications %}
+    {% for note in notifications %}
+        <div class="card" style="padding:10px; margin-bottom:10px; border:1px solid #ddd;">
+            <p>{{ note.message }}</p>
+            <small>{{ note.created_at }}</small>
+        </div>
+    {% endfor %}
+{% else %}
+    <p>No notifications.</p>
+{% endif %}
+
+<hr>
+
+<!-- =============================== -->
+<!-- CREATE ARTICLE -->
+<!-- =============================== -->
+
+<h3>Create Article</h3>
+
+<form method="POST" action="{% url 'create_article' %}">
+    {% csrf_token %}
+
+    <input type="text" name="title" placeholder="Article Title" required>
+    <br><br>
+
+    <textarea name="content" rows="5" placeholder="Write your content..." required></textarea>
+    <br><br>
+
+    <label><strong>Choose Publisher:</strong></label>
+    <br>
+
+    <select name="publisher">
+        <option value="">-- Select Publisher --</option>
+
+        {% for publisher in publishers %}
+            <option value="{{ publisher.id }}">
+                {{ publisher.name }}
+            </option>
+        {% empty %}
+            <option disabled>No publishers available</option>
+        {% endfor %}
+    </select>
+
+    <br><br>
+
+    <button type="submit">Submit Article</button>
+</form>
+
+<hr>
+
+<!-- =============================== -->
+<!-- YOUR ARTICLES -->
+<!-- =============================== -->
+
+<h3>Your Articles</h3>
+
+{% if articles %}
+    {% for article in articles %}
+        <div class="card" style="padding:10px; margin-bottom:10px; border:1px solid #ddd;">
+
+            <h4>{{ article.title }}</h4>
+
+            <p>{{ article.content|truncatewords:25 }}</p>
+
+            <!-- Publisher -->
+            {% if article.publisher %}
+                <p><strong>Publisher:</strong> {{ article.publisher.name }}</p>
+            {% else %}
+                <p><strong>Publisher:</strong> Not Assigned</p>
+            {% endif %}
+
+            <!-- Status -->
+            <p>
+                <strong>Status:</strong>
+                {% if article.approved %}
+                    <span style="color:green;">Approved</span>
+                {% else %}
+                    <span style="color:red;">Pending Approval</span>
+                {% endif %}
+            </p>
+
+            <!-- Actions -->
+            <a href="{% url 'update_article' article.id %}">Edit</a> |
+            <a href="{% url 'delete_article' article.id %}">Delete</a>
+
+        </div>
+    {% endfor %}
+{% else %}
+    <p>You have not written any articles yet.</p>
+{% endif %}
+
+<hr>
+
+<!-- =============================== -->
+<!-- SUBSCRIBE TO PUBLISHERS -->
+<!-- =============================== -->
+
+<h3>Publishers</h3>
+
+{% if publishers %}
+    {% for publisher in publishers %}
+        <div class="card" style="padding:10px; margin-bottom:10px; border:1px solid #ddd;">
+
+            <p><strong>{{ publisher.name }}</strong></p>
+
+            {% if publisher.id in user_subscriptions %}
+                <a href="{% url 'unsubscribe_publisher' publisher.id %}">
+                    Unsubscribe
+                </a>
+            {% else %}
+                <a href="{% url 'subscribe_publisher' publisher.id %}">
+                    Subscribe
+                </a>
+            {% endif %}
+
+        </div>
+    {% endfor %}
+{% else %}
+    <p>No publishers available.</p>
+{% endif %}
+
+{% endblock %}

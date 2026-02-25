@@ -65,11 +65,17 @@ WSGI_APPLICATION = 'new_project.wsgi.application'
 from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'news_db',
+        'USER': 'news_user',
+        'PASSWORD': 'StrongPassword123',
+        'HOST': 'localhost',
+        'PORT': '3306',
+        'OPTIONS': {
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+        },
     }
 }
 
@@ -109,3 +115,19 @@ AUTH_USER_MODEL = 'news.User'   # <--- this is critical for our roles
 LOGIN_URL = "login"
 LOGIN_REDIRECT_URL = "dashboard"
 LOGOUT_REDIRECT_URL = "home"
+
+
+# ----------------------------------
+# 🔹 EMAIL CONFIGURATION
+# ----------------------------------
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
+EMAIL_HOST_USER = 'your_email@gmail.com'
+EMAIL_HOST_PASSWORD = 'your_app_password_here'
+
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
