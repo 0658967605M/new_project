@@ -1,93 +1,127 @@
-# Django News Publishing Platform
+# New Project
 
-A role-based News Publishing Web Application built with Django and MySQL.
-This platform allows journalists to create articles, editors to approve them, and readers to read and subscribe to their favorite journalists and publishers.
+A Django-based news publishing platform with role-based functionality. Users can register as Readers, Journalists, or Editors, create and manage articles, and view dashboards. This project is containerized with Docker and includes Sphinx documentation.
 
-# Poject Overview
-This project demonstrates:
-Custom user roles
-Role-based permissions
-Article publishing workflow
-Subscription system (follow/unfollow)
-Clean Django architecture
-Template inheritance
-Relational database design
-It is built as a full-stack backend + template-based web application using Django.
-
-## User Roles & Capabilities
-# Reader
-View approved articles
-Read full article details
-Subscribe to journalists
-Subscribe to publishers
-Unsubscribe anytime
-See dynamic Subscribe / Unsubscribe buttons
-
-# Journalist
-Create new articles
-Edit own articles
-Delete own articles
-Assign publisher to article
-View own article list
-Articles created by journalists require editor approval before being visible to readers.
-
-# Editor
-View unapproved articles
-Approve articles
-Manage publishing workflow
+---
 
 ## Features
-# Authentication
-Custom user model
-Login / Register
-Role selection during registration
-Login required for dashboard access
 
-# Article Management
-Create Article
-Update Article
-Delete Article
-Read Article
-Approval system
-Timestamp (created_at)
-Publisher association
+- Role-based authentication: Reader, Journalist, Editor  
+- Article management: create, edit, delete  
+- Subscription system for readers to follow journalists  
+- Dashboard views for different roles  
+- Email login and registration  
+- Docker-ready for easy deployment  
+- Full Sphinx documentation
 
-# Subscription System
-Subscribe to Journalist
-Subscribe to Publisher
-Prevent duplicate subscriptions
-Unsubscribe feature
-Dynamic UI buttons
-Role-based restriction (only readers can subscribe)
+---
 
-# Dashboard System
-Dashboard content changes based on role:
-Reader Dashboard → Shows approved articles + subscribe buttons
-Journalist Dashboard → Shows own created articles
-Editor Dashboard → Shows pending articles for approval
+## Installation & Setup (Steps 1–7)
 
-## Database Models
-# User
-username
-password
-role (reader / journalist / editor)
-publisher_profile (optional, for journalists)
+### Step 1: Clone the Repository
+```bash
+git clone https://github.com/0658967605M/new_project.git
+cd new_project
 
-# Article
-title
-content
-created_by (User)
-publisher (Publisher)
-approved (Boolean)
-created_at (DateTime)
+# New Project
 
-# Publisher
-name
-description
+A Django-based news publishing platform with role-based functionality. Users can register as Readers, Journalists, or Editors, create and manage articles, and view dashboards. This project is containerized with Docker and includes Sphinx documentation.
 
-# Subscription
-reader (User)
-journalist (User, nullable)
-publisher (Publisher, nullable)
-created_at
-Unique constraints to prevent duplicates
+---
+
+## Features
+
+- Role-based authentication: Reader, Journalist, Editor  
+- Article management: create, edit, delete  
+- Subscription system for readers to follow journalists  
+- Dashboard views for different roles  
+- Email login and registration  
+- Docker-ready for easy deployment  
+- Full Sphinx documentation
+
+---
+
+## Installation & Setup (Steps 1–7)
+
+### Step 1: Clone the Repository
+```bash
+git clone https://github.com/0658967605M/new_project.git
+cd new_project
+
+### Step 2: Create and Activate a Virtual Environment
+python -m venv venv
+venv\Scripts\activate      # Windows
+# source venv/bin/activate # Linux / Mac
+
+
+###Step 3: Install Dependencies
+pip install --upgrade pip
+pip install -r requirements.txt
+
+
+### Step 4: Database Setup (SQLite)
+
+Ensure your new_project/settings.py uses SQLite:
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
+
+Apply migrations and create a superuser:
+
+python manage.py makemigrations
+python manage.py migrate
+python manage.py createsuperuser  # optional
+
+
+### Step 5: Running the Project Locally
+python manage.py runserver
+
+Visit http://127.0.0.1:8000
+ in your browser.
+
+
+### Step 6: Docker Setup
+
+1.Build the Docker image:
+
+docker build --no-cache -t new_project .
+
+2.Run the container:
+
+
+docker run -p 8000:8000 new_project
+
+Visit http://localhost:8000
+ to access the app inside Docker.
+
+⚠️ Use SQLite in Docker to avoid MySQL errors.
+
+
+### Step 7: Sphinx Documentation
+
+1.Install Sphinx:
+
+pip install sphinx
+
+2.Initialize Sphinx (if not done):
+
+cd docs
+sphinx-quickstart
+
+3.Generate API documentation from apps:
+
+# From project root
+python -m sphinx.ext.apidoc -o docs news
+python -m sphinx.ext.apidoc -o docs new_project
+
+4.Build HTML docs:
+
+cd docs
+.\make.bat html    # Windows
+# make html        # Linux / Mac
+
+5.Open docs/_build/html/index.html in your browser to view docs.
