@@ -1,15 +1,20 @@
 # Python
-__pycache__/
 *.pyc
+__pycache__/
 *.pyo
 *.pyd
 
-# Django
-db.sqlite3
-
-# Virtual env
+# Virtual environment
 venv/
-env/
-
-# Environment variables
 .env
+
+# SQLite database
+*.sqlite3
+
+# Sphinx build
+docs/build/
+
+# VSCode / Windows files
+.vscode/
+Thumbs.db
+.DS_Store
