@@ -1,127 +1,270 @@
-# New Project
+# New Project – Django News Publishing Platform
 
-A Django-based news publishing platform with role-based functionality. Users can register as Readers, Journalists, or Editors, create and manage articles, and view dashboards. This project is containerized with Docker and includes Sphinx documentation.
+A **Django-based News Publishing Platform** that allows users to register and interact based on their assigned roles.
+
+Users can register as:
+
+- **Readers** – read articles and subscribe to journalists
+- **Journalists** – create and manage articles
+- **Editors** – review and manage publishing content
+
+The project includes:
+
+- Role-based dashboards
+- Article creation and management
+- Subscription system
+- Docker containerization
+- Sphinx documentation
 
 ---
 
-## Features
+# Features
 
-- Role-based authentication: Reader, Journalist, Editor  
-- Article management: create, edit, delete  
-- Subscription system for readers to follow journalists  
-- Dashboard views for different roles  
-- Email login and registration  
-- Docker-ready for easy deployment  
-- Full Sphinx documentation
+- Role-based authentication (Reader, Journalist, Editor)
+- User registration and login
+- Article creation, editing, and deletion
+- Reader subscription system
+- Dashboard views per role
+- Django Admin interface
+- Docker support
+- Sphinx documentation
 
 ---
 
-## Installation & Setup (Steps 1–7)
+# Technologies Used
 
-### Step 1: Clone the Repository
+- Python
+- Django
+- SQLite
+- Docker
+- Sphinx
+
+---
+
+# Project Structure
+
+```
+new_project/
+│
+├── news/                       # Main application
+│   ├── migrations/
+│   ├── templates/
+│   ├── models.py
+│   ├── views.py
+│   ├── forms.py
+│   └── urls.py
+│
+├── new_project/                # Django project configuration
+│   ├── settings.py
+│   ├── urls.py
+│   ├── asgi.py
+│   └── wsgi.py
+│
+├── docs/                       # Sphinx documentation
+│   ├── source/
+│   └── build/
+│
+├── manage.py
+├── requirements.txt
+├── Dockerfile
+└── README.md
+```
+
+---
+
+# Installation and Setup
+
+## Step 1: Clone the Repository
+
 ```bash
 git clone https://github.com/0658967605M/new_project.git
 cd new_project
-
-# New Project
-
-A Django-based news publishing platform with role-based functionality. Users can register as Readers, Journalists, or Editors, create and manage articles, and view dashboards. This project is containerized with Docker and includes Sphinx documentation.
+```
 
 ---
 
-## Features
+# Step 2: Create a Virtual Environment
 
-- Role-based authentication: Reader, Journalist, Editor  
-- Article management: create, edit, delete  
-- Subscription system for readers to follow journalists  
-- Dashboard views for different roles  
-- Email login and registration  
-- Docker-ready for easy deployment  
-- Full Sphinx documentation
+Create the environment:
 
----
-
-## Installation & Setup (Steps 1–7)
-
-### Step 1: Clone the Repository
 ```bash
-git clone https://github.com/0658967605M/new_project.git
-cd new_project
-
-### Step 2: Create and Activate a Virtual Environment
 python -m venv venv
-venv\Scripts\activate      # Windows
-# source venv/bin/activate # Linux / Mac
+```
 
+Activate the environment.
 
-###Step 3: Install Dependencies
+### Windows
+
+```bash
+venv\Scripts\activate
+```
+
+### Linux / Mac
+
+```bash
+source venv/bin/activate
+```
+
+---
+
+# Step 3: Install Dependencies
+
+Upgrade pip and install required packages.
+
+```bash
 pip install --upgrade pip
 pip install -r requirements.txt
+```
 
+---
 
-### Step 4: Database Setup (SQLite)
+# Step 4: Configure the Database
 
-Ensure your new_project/settings.py uses SQLite:
+This project uses **SQLite** for simplicity.
 
+Ensure the following configuration exists in  
+`new_project/settings.py`:
+
+```python
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+```
 
-Apply migrations and create a superuser:
+---
 
+# Step 5: Apply Migrations
+
+Run the following commands to create database tables.
+
+```bash
 python manage.py makemigrations
 python manage.py migrate
-python manage.py createsuperuser  # optional
+```
 
+(Optional) Create a superuser for the admin panel:
 
-### Step 5: Running the Project Locally
+```bash
+python manage.py createsuperuser
+```
+
+---
+
+# Step 6: Run the Application Locally
+
+Start the Django development server.
+
+```bash
 python manage.py runserver
+```
 
-Visit http://127.0.0.1:8000
- in your browser.
+Open the application in your browser:
 
+```
+http://127.0.0.1:8000
+```
 
-### Step 6: Docker Setup
+Admin dashboard:
 
-1.Build the Docker image:
+```
+http://127.0.0.1:8000/admin
+```
 
+---
+
+# Running the Application with Docker
+
+Make sure **Docker Desktop is installed and running**.
+
+### Step 1: Navigate to the project root folder
+
+```
+new_project/
+```
+
+### Step 2: Build the Docker image
+
+```bash
 docker build --no-cache -t new_project .
+```
 
-2.Run the container:
+### Step 3: Run the Docker container
 
-
+```bash
 docker run -p 8000:8000 new_project
+```
 
-Visit http://localhost:8000
- to access the app inside Docker.
+Open the application in your browser:
 
-⚠️ Use SQLite in Docker to avoid MySQL errors.
+```
+http://localhost:8000
+```
 
+---
 
-### Step 7: Sphinx Documentation
+# Sphinx Documentation
 
-1.Install Sphinx:
+The project includes **Sphinx documentation for developers**.
 
-pip install sphinx
+The documentation files are located in the `docs` directory.
 
-2.Initialize Sphinx (if not done):
+After building the documentation, open the generated HTML file:
 
-cd docs
-sphinx-quickstart
+```
+docs/_build/html/index.html
+```
 
-3.Generate API documentation from apps:
+This documentation describes the project modules and code structure.
 
-# From project root
-python -m sphinx.ext.apidoc -o docs news
-python -m sphinx.ext.apidoc -o docs new_project
+---
 
-4.Build HTML docs:
+# Admin Login
 
-cd docs
-.\make.bat html    # Windows
-# make html        # Linux / Mac
+After creating a superuser, access the Django admin panel:
 
-5.Open docs/_build/html/index.html in your browser to view docs.
+```
+http://127.0.0.1:8000/admin
+```
+
+Login using the credentials created with:
+
+```
+python manage.py createsuperuser
+```
+
+---
+
+# Example User Roles
+
+The system supports three roles:
+
+### Reader
+- View articles
+- Subscribe to journalists
+
+### Journalist
+- Create and manage articles
+- Publish content
+
+### Editor
+- Review and manage articles
+- Oversee platform content
+
+---
+
+# Author
+
+**Manqoba Manqoba**
+
+---
+
+# GitHub Repository
+
+```
+https://github.com/0658967605M/new_project
+```
+
+---
