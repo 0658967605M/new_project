@@ -11,9 +11,6 @@ venv/
 # SQLite database
 *.sqlite3
 
-# Sphinx build
-docs/build/
-
 # VSCode / Windows files
 .vscode/
 Thumbs.db
