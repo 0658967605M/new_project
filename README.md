@@ -4,40 +4,34 @@ A **Django-based News Publishing Platform** that allows users to register and in
 
 Users can register as:
 
-- **Readers** – read articles and subscribe to journalists
-- **Journalists** – create and manage articles
-- **Editors** – review and manage publishing content
+* **Readers** – read articles and subscribe to journalists
+* **Journalists** – create and manage articles
+* **Editors** – review and manage publishing content
 
-The project includes:
-
-- Role-based dashboards
-- Article creation and management
-- Subscription system
-- Docker containerization
-- Sphinx documentation
+The project includes role-based dashboards, article management, a subscription system, Docker containerization, and Sphinx documentation.
 
 ---
 
 # Features
 
-- Role-based authentication (Reader, Journalist, Editor)
-- User registration and login
-- Article creation, editing, and deletion
-- Reader subscription system
-- Dashboard views per role
-- Django Admin interface
-- Docker support
-- Sphinx documentation
+* Role-based authentication (Reader, Journalist, Editor)
+* User registration and login
+* Article creation, editing, and deletion
+* Reader subscription system
+* Dashboard views based on user roles
+* Django Admin interface
+* Docker support for containerized deployment
+* Sphinx documentation for developers
 
 ---
 
 # Technologies Used
 
-- Python
-- Django
-- SQLite
-- Docker
-- Sphinx
+* Python
+* Django
+* SQLite
+* Docker
+* Sphinx
 
 ---
 
@@ -46,7 +40,7 @@ The project includes:
 ```
 new_project/
 │
-├── news/                       # Main application
+├── news/                       # Main Django application
 │   ├── migrations/
 │   ├── templates/
 │   ├── models.py
@@ -85,13 +79,13 @@ cd new_project
 
 # Step 2: Create a Virtual Environment
 
-Create the environment:
+Create a virtual environment:
 
 ```bash
 python -m venv venv
 ```
 
-Activate the environment.
+Activate the virtual environment.
 
 ### Windows
 
@@ -109,7 +103,7 @@ source venv/bin/activate
 
 # Step 3: Install Dependencies
 
-Upgrade pip and install required packages.
+Upgrade pip and install the required packages.
 
 ```bash
 pip install --upgrade pip
@@ -122,7 +116,7 @@ pip install -r requirements.txt
 
 This project uses **SQLite** for simplicity.
 
-Ensure the following configuration exists in  
+Ensure the following configuration exists in
 `new_project/settings.py`:
 
 ```python
@@ -138,14 +132,14 @@ DATABASES = {
 
 # Step 5: Apply Migrations
 
-Run the following commands to create database tables.
+Run the following commands to create the database tables.
 
 ```bash
 python manage.py makemigrations
 python manage.py migrate
 ```
 
-(Optional) Create a superuser for the admin panel:
+(Optional) Create a superuser for the Django admin panel:
 
 ```bash
 python manage.py createsuperuser
@@ -177,7 +171,7 @@ http://127.0.0.1:8000/admin
 
 # Running the Application with Docker
 
-Make sure **Docker Desktop is installed and running**.
+Ensure **Docker Desktop** is installed and running.
 
 ### Step 1: Navigate to the project root folder
 
@@ -205,19 +199,31 @@ http://localhost:8000
 
 ---
 
-# Sphinx Documentation
+# Building the Documentation
 
-The project includes **Sphinx documentation for developers**.
+This project uses **Sphinx** to generate documentation.
 
-The documentation files are located in the `docs` directory.
+### Step 1: Navigate to the docs folder
 
-After building the documentation, open the generated HTML file:
-
-```
-docs/_build/html/index.html
+```bash
+cd docs
 ```
 
-This documentation describes the project modules and code structure.
+### Step 2: Build the documentation
+
+```bash
+make html
+```
+
+### Step 3: Open the generated documentation
+
+After the build completes, open the following file in your browser:
+
+```
+docs/build/html/index.html
+```
+
+This documentation contains automatically generated information about the project modules and code.
 
 ---
 
@@ -239,32 +245,31 @@ python manage.py createsuperuser
 
 # Example User Roles
 
-The system supports three roles:
+## Reader
 
-### Reader
-- View articles
-- Subscribe to journalists
+* View articles
+* Subscribe to journalists
 
-### Journalist
-- Create and manage articles
-- Publish content
+## Journalist
 
-### Editor
-- Review and manage articles
-- Oversee platform content
+* Create and manage articles
+* Publish content
+
+## Editor
+
+* Review and manage articles
+* Oversee platform content
 
 ---
 
 # Author
 
-**Manqoba Manqoba**
+**Manqoba Hlongwane**
 
 ---
 
 # GitHub Repository
 
-```
 https://github.com/0658967605M/new_project
-```
 
 ---
